@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  item-app:
+    build: cecep31/item-app:v1
+    ports:
+      - "80:8080"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/mydb
+    depends_on:
+      - item-db
+  item-db:
+    image: mongo:3
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: mydb
+    volumes:
+      - app-db:/data/db
+
+volumes:
+  app-db:
