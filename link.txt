@@ -1,0 +1,2 @@
+https://github.com/cecep31/a433-microservices/pkgs/container/a433-microservices%2Fv1
+ghcr.io/cecep31/a433-microservices:v1

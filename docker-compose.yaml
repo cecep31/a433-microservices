@@ -2,21 +2,26 @@ version: "3.8"
 
 services:
   item-app:
-    build: cecep31/item-app:v1
+    image: ghcr.io/cecep31/a433-microservices:v1
+    restart: always
     ports:
       - "80:8080"
-    environment:
-      - DATABASE_URL=postgres://user:password@db:5432/mydb
     depends_on:
       - item-db
+    networks:
+      - app-network
+
   item-db:
     image: mongo:3
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: mydb
+    restart: always
     volumes:
       - app-db:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
   app-db:
